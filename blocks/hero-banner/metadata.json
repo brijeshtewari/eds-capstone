@@ -1,0 +1,10 @@
+{
+  "variantName": "hero-banner",
+  "baseBlock": "hero",
+  "visualCharacteristics": "Full-bleed photographic banner with an overlaid white content box at the bottom-left containing a heading, paragraph, and a single CTA button.",
+  "contentPattern": "Image cell (background photo) plus a content cell with a heading, paragraph, and CTA link.",
+  "usage": "Mid-page promotional banner spotlighting a single adventure with a call to action.",
+  "canonicalModel": "standalone",
+  "options": [],
+  "memberVariantIds": ["hero-banner"]
+}

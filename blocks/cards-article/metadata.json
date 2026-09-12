@@ -1,0 +1,10 @@
+{
+  "variantName": "cards-article",
+  "baseBlock": "cards",
+  "visualCharacteristics": "Four-up grid of borderless article cards, each with an image on top and a bold title with a short description below.",
+  "contentPattern": "One row per card. Each row has an image cell and a body cell (title + short description).",
+  "usage": "Article and adventure listing grids ('Recent Articles', 'Where do you want to go?').",
+  "canonicalModel": "standalone",
+  "options": [],
+  "memberVariantIds": ["cards-article"]
+}

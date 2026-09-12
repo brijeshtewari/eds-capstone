@@ -1,0 +1,11 @@
+{
+  "type": "da",
+  "sites": {
+    "eds-capstone": {
+      "previewOrg": "brijeshtewari",
+      "previewSite": "eds-capstone",
+      "contentHostUrl": "https://content.da.live/brijeshtewari/eds-capstone/",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}
