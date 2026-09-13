@@ -1,3 +1,10 @@
+/* Block: hero-banner
+ * "imagebottom" teaser: full-bleed photographic banner with a white content
+ * box overlapping the bottom of the image. Values extracted from source
+ * computed styles (wknd.site) at 1280px viewport.
+ */
+
+/* full-bleed: neutralize section max-width + padding so the banner spans edge to edge */
 .hero-banner-container .hero-banner-wrapper {
   max-width: unset;
   padding: 0;
@@ -5,46 +12,67 @@
 
 .hero-banner {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 24px;
-  min-height: min(50vw, 480px);
+}
+
+/* image row — full-width banner in normal flow */
+.hero-banner > div:first-child {
+  margin: 0;
+  line-height: 0;
 }
 
 .hero-banner picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+  display: block;
 }
 
 .hero-banner img {
-  object-fit: cover;
+  display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 2 / 1;
 }
 
-.hero-banner .hero-banner-content {
+/* white content box overlapping the bottom of the image */
+.hero-banner-content {
   position: relative;
-  background-color: #fff;
-  padding: 24px 32px;
-  max-width: 640px;
+  z-index: 1;
+  margin: -32px 16px 0;
+  padding: 12px 24px 18px;
+  background-color: var(--background-color);
 }
 
+.hero-banner-content h2 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+}
+
+.hero-banner-content p {
+  margin: 0;
+  font-size: var(--body-font-size-m);
+  line-height: 1.75;
+  color: var(--text-color);
+}
+
+/* CTA paragraph (button) sits below the description */
+.hero-banner-content p:last-child {
+  margin-top: 18px;
+}
+
+/* no-image fallback: plain text block, no overlay */
 .hero-banner.no-image {
   min-height: unset;
 }
 
 .hero-banner.no-image .hero-banner-content {
-  background-color: transparent;
+  margin: 0;
   padding: 0;
+  background-color: transparent;
 }
 
 @media (width >= 900px) {
-  .hero-banner {
-    padding: 0 32px 48px;
+  .hero-banner-content {
+    margin: -180px 44px 0;
+    padding: 18px 28px;
   }
 }
