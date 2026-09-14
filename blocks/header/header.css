@@ -45,8 +45,8 @@ header .nav-utility-inner {
   gap: 24px;
   max-width: 1164px;
   margin: 0 auto;
-  padding: 8px 14px;
-  min-height: 40px;
+  padding: 2px 14px;
+  min-height: 0;
 }
 
 header .nav-utility a {
@@ -144,7 +144,7 @@ header .nav-main-inner {
   gap: 16px;
   max-width: 1164px;
   margin: 0 auto;
-  padding: 16px 14px;
+  padding: 54px 14px;
 }
 
 header .nav-brand img {
