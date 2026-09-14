@@ -1,7 +1,14 @@
 /* columns-featured -- featured-article promo (image + text panel)
    Values extracted from source computed styles (wknd.site .cmp-teaser--featured).
-   The grey (#f5f5f5) panel comes from the section-level `highlight` style;
-   this block styles the two-column image/text layout and internal spacing only. */
+   In the source only the RIGHT TEXT PANEL is grey (not the whole section and
+   not the image), and the block is contained (not full-bleed). */
+
+/* Neutralize the section-level `highlight` full-width grey — the source greys
+   only the text panel, applied below. Keep the section contained/centered. */
+.columns-featured-container.section.highlight {
+  background-color: transparent;
+  padding: 40px 0;
+}
 
 /* Row: stack on mobile, image on top */
 .columns-featured > div {
@@ -15,16 +22,18 @@
   object-fit: cover;
 }
 
-/* Text content cell -- top-aligned (source justify-content: normal) */
+/* Text content cell -- grey panel, top-aligned (source justify-content: normal) */
 .columns-featured > div > div {
   display: flex;
   flex-direction: column;
   padding: 32px 24px;
+  background-color: #ebebeb;
 }
 
-/* Image cell */
+/* Image cell — no padding, and must NOT get the grey panel background */
 .columns-featured > div > .columns-featured-img-col {
   padding: 0;
+  background-color: transparent;
 }
 
 .columns-featured > div > .columns-featured-img-col img {

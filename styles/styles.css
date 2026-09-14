@@ -104,6 +104,20 @@ h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
 
+/* WKND section-title accent: short yellow underline under default-content h2
+   section headings (e.g. "Recent Articles", "Next Adventures"). */
+main .default-content-wrapper h2 {
+  padding-bottom: 12px;
+}
+
+main .default-content-wrapper h2::after {
+  content: '';
+  display: block;
+  width: 84px;
+  margin-top: 12px;
+  border-bottom: 2px solid var(--brand-primary);
+}
+
 p,
 dl,
 ol,
