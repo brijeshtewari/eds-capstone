@@ -201,14 +201,21 @@
 
 /* ===================== Desktop ===================== */
 @media (width >= 900px) {
-  /* white strip below the photo holds dots + arrows */
+  /* white strip below the photo holds dots + arrows (source total ~668px:
+     640px photo + ~28px strip) */
   .carousel-hero {
-    padding-bottom: 91px;
+    padding-bottom: 28px;
   }
 
-  /* fixed-height photo in normal flow (source: 640px) */
+  /* fixed-height photo in normal flow (source: 640px) — constrain the
+     <picture>/<img> to the container so the photo doesn't grow to its
+     intrinsic height (~810px). */
   .carousel-hero .carousel-hero-slide .carousel-hero-slide-image {
     height: 640px;
+  }
+
+  .carousel-hero .carousel-hero-slide .carousel-hero-slide-image picture {
+    height: 100%;
   }
 
   /* centered white box pulled up to overlap the photo bottom by 180px */
@@ -236,12 +243,12 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 72px;
+    bottom: 8px;
     padding: 0;
   }
 
   .carousel-hero .carousel-hero-navigation-buttons {
-    bottom: 64px;
+    bottom: 2px;
     right: 0;
   }
 }
