@@ -143,8 +143,10 @@ header .nav-main-inner {
   justify-content: space-between;
   gap: 16px;
   max-width: 1164px;
+  min-height: 168px; /* match WKND source main-header band (total header ~194px) */
   margin: 0 auto;
-  padding: 54px 14px;
+  padding: 0 14px;
+  box-sizing: border-box;
 }
 
 header .nav-brand img {
