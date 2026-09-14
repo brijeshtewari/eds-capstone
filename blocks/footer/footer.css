@@ -59,42 +59,48 @@ footer .footer-nav a:focus {
   color: var(--wknd-brand-yellow, #ffea00);
 }
 
-/* social */
+/* social — heading + icon tiles on one row (like source) */
 footer .footer-social {
+  display: flex;
+  align-items: center;
+  gap: 16px;
   padding: 16px 0;
 }
 
 footer .footer-social h4 {
-  margin: 0 0 12px;
+  margin: 0;
   color: #ebebeb; /* override global h1-h6 dark color */
   font-family: inherit;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.5;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 footer .footer-social-list {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
 }
 
-footer .footer-social-list img {
-  width: 28px;
-  height: 28px;
-  display: block;
-
-  /* source icons are light on the dark footer; the source SVGs are dark
-     artwork, so invert them to near-white to match */
-  filter: brightness(0) invert(0.92);
-}
-
+/* each social link is a 48x48 light square tile with a dark glyph */
 /* stylelint-disable-next-line no-descending-specificity */
 footer .footer-social-list a {
   display: inline-flex;
-  color: #ebebeb;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: #ebebeb;
+  color: #202020;
   transition: opacity 0.2s;
+}
+
+footer .footer-social-list img {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
 footer .footer-social-list a:hover,
