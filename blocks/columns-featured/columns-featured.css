@@ -30,10 +30,17 @@
   background-color: #ebebeb;
 }
 
-/* Image cell — no padding, and must NOT get the grey panel background */
+/* Image cell — no padding, and must NOT get the grey panel background.
+   Make the picture + image fill the full column height so the photo matches
+   the (taller, text-driven) row height instead of leaving a gap below it. */
 .columns-featured > div > .columns-featured-img-col {
   padding: 0;
   background-color: transparent;
+}
+
+.columns-featured > div > .columns-featured-img-col picture {
+  display: block;
+  height: 100%;
 }
 
 .columns-featured > div > .columns-featured-img-col img {
