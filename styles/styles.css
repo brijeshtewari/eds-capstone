@@ -141,10 +141,13 @@ main .default-content-wrapper p > a:only-child:focus-visible {
   text-decoration: none;
 }
 
-/* WKND section divider: a light rule closing default-content sections that end
-   with a trailing CTA (e.g. the Recent Articles / Where-to-go sections). */
-main .section.cards-article-container {
-  border-bottom: 1px solid #ebebeb;
+/* WKND section divider: a light rule BETWEEN a trailing CTA and the next
+   default-content heading (e.g. between "All Articles" and "Next Adventures").
+   The generous margins mirror the source's spacing around the rule. */
+main .default-content-wrapper p:has(> a:only-child) + h2 {
+  margin-top: 48px;
+  padding-top: 48px;
+  border-top: 1px solid #ebebeb;
 }
 
 p,
