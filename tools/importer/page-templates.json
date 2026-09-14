@@ -9,8 +9,7 @@
         "https://wknd.site/us/en.html"
       ],
       "representativeUrl": "https://wknd.site/us/en.html",
-      "description": "WKND US homepage: hero carousel, featured-article promo, recent-articles card grid, next-adventures banner, and destinations card grid.",
-      "urlPattern": "/us/*",
+      "description": "To be named in naming step",
       "blocks": [
         {
           "name": "carousel-hero",
@@ -106,6 +105,82 @@
           "defaultContent": [
             ".cmp-layout-container--fixed:nth-of-type(2) .cmp-title",
             ".cmp-layout-container--fixed:nth-of-type(2) .button.cmp-button--primary"
+          ]
+        }
+      ],
+      "urlPattern": "/us/*"
+    },
+    {
+      "name": "magazine",
+      "urls": [
+        "https://wknd.site/us/en/magazine.html"
+      ],
+      "representativeUrl": "https://wknd.site/us/en/magazine.html",
+      "description": "WKND Magazine landing page: featured article promo, recent-articles card grid, and a members-only two-up promo grid.",
+      "blocks": [
+        {
+          "name": "columns-featured",
+          "instances": [
+            ".teaser.cmp-teaser--featured"
+          ]
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            ".image-list.list"
+          ]
+        },
+        {
+          "name": "cards-promo",
+          "instances": [
+            ".teaser.cmp-teaser--secure"
+          ]
+        }
+      ],
+      "urlPattern": "/us/en/magazine",
+      "sections": [
+        {
+          "id": "section-1-featured-article",
+          "name": "featured-article",
+          "selector": [
+            ".teaser.cmp-teaser--featured"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-featured"
+          ],
+          "defaultContent": [
+            ".title.aem-GridColumn:nth-of-type(1)"
+          ]
+        },
+        {
+          "id": "section-2-all-articles",
+          "name": "all-articles",
+          "selector": [
+            ".image-list.list"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-article"
+          ],
+          "defaultContent": [
+            ".title.cmp-title--underline:nth-of-type(3)"
+          ]
+        },
+        {
+          "id": "section-3-members-only",
+          "name": "members-only",
+          "selector": [
+            ".teaser.cmp-teaser--secure"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-promo"
+          ],
+          "defaultContent": [
+            ".title.cmp-title--underline:nth-of-type(5)",
+            ".text",
+            ".separator.cmp-separator--space-medium"
           ]
         }
       ]
