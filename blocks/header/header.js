@@ -42,14 +42,14 @@ function decorateLocale(list) {
   const firstItem = list.querySelector(':scope > li');
   const firstFlag = firstItem?.querySelector('img');
   const firstLocale = firstItem?.querySelector('ul a');
-  // Country name = the <li>'s own text nodes (excluding the nested locale list).
-  const countryName = firstItem
-    ? [...firstItem.childNodes]
-      .filter((n) => n.nodeType === Node.TEXT_NODE)
-      .map((n) => n.textContent.trim())
-      .join(' ')
-      .trim()
-    : '';
+  // Country name = the item's text with the nested locale-code list removed
+  // (handles both "<li>Country<ul>…" and "<li><p><img> Country</p><ul>…").
+  let countryName = '';
+  if (firstItem) {
+    const clone = firstItem.cloneNode(true);
+    clone.querySelectorAll('ul').forEach((u) => u.remove());
+    countryName = clone.textContent.replace(/\s+/g, ' ').trim();
+  }
   const localeCode = firstLocale ? firstLocale.textContent.trim() : 'en-US';
   if (firstFlag) toggle.append(firstFlag.cloneNode(true));
   const label = document.createElement('span');
