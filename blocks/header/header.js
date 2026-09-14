@@ -93,8 +93,12 @@ export default async function decorate(block) {
   if (!fragment) return;
   fixImagePaths(fragment);
 
-  const sections = [...fragment.querySelectorAll('body > main > div, main > div, body > div')]
-    .filter((d) => !d.classList.contains('metadata'));
+  // The fragment may arrive wrapped (<body><main>…) on localhost or as bare
+  // top-level <div>s on DA/EDS. Prefer the wrapped scope, fall back to the
+  // parsed container's own direct children.
+  const scope = fragment.querySelector('main') || fragment.querySelector('body') || fragment;
+  const sections = [...scope.children]
+    .filter((el) => el.tagName === 'DIV' && !el.classList.contains('metadata'));
 
   const nav = document.createElement('nav');
   nav.id = 'nav';
