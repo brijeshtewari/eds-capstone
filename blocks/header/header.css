@@ -43,9 +43,9 @@ header .nav-utility-inner {
   align-items: center;
   justify-content: flex-end;
   gap: 24px;
-  max-width: 1200px;
+  max-width: 1164px;
   margin: 0 auto;
-  padding: 8px 16px;
+  padding: 8px 14px;
   min-height: 40px;
 }
 
@@ -142,9 +142,9 @@ header .nav-main-inner {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  max-width: 1200px;
+  max-width: 1164px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 16px 14px;
 }
 
 header .nav-brand img {
@@ -189,14 +189,14 @@ header nav.is-open .nav-hamburger-icon { background: transparent; }
 header nav.is-open .nav-hamburger-icon::before { transform: translateY(7px) rotate(45deg); }
 header nav.is-open .nav-hamburger-icon::after { transform: translateY(-7px) rotate(-45deg); }
 
-/* nav-sections breaks out of the .nav-main-inner 16px padding so the menu is edge-to-edge on mobile */
+/* nav-sections breaks out of the .nav-main-inner 14px padding so the menu is edge-to-edge on mobile */
 header .nav-sections {
   order: 3;
   display: none;
   flex: 0 0 100vw;
   width: 100vw;
-  margin-left: -16px;
-  margin-right: -16px;
+  margin-left: -14px;
+  margin-right: -14px;
 }
 
 header nav.is-open .nav-sections {
