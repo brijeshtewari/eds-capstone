@@ -6,5 +6,10 @@
   "usage": "Article and adventure listing grids ('Recent Articles', 'Where do you want to go?').",
   "canonicalModel": "standalone",
   "options": [],
-  "memberVariantIds": ["cards-article"]
+  "memberVariantIds": ["cards-article"],
+  "usage": {
+    "pagesUsing": ["/us/en/magazine"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-14"
+  }
 }
