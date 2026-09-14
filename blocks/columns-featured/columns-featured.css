@@ -15,11 +15,10 @@
   object-fit: cover;
 }
 
-/* Text content cell */
+/* Text content cell -- top-aligned (source justify-content: normal) */
 .columns-featured > div > div {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: 32px 24px;
 }
 
@@ -38,7 +37,7 @@
   font-family: var(--body-font-family);
   font-size: 18px;
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 2.5; /* source: 45px */
   color: var(--text-color);
 }
 
@@ -66,7 +65,7 @@
 /* CTA -- source uses a plain link styled as a solid yellow button
    (EDS does not decorate this anchor with .button here). */
 .columns-featured > div > div > p:last-child {
-  margin: 18px 0 0;
+  margin: 18px 0;
 }
 
 .columns-featured a:any-link {
@@ -79,8 +78,7 @@
   font-family: var(--body-font-family);
   font-size: 14px;
   font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: 0.03em;
+  line-height: 1.5; /* source: 21px */
   text-transform: uppercase;
   text-decoration: none;
 }

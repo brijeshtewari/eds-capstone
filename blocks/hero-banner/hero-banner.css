@@ -1,7 +1,7 @@
 /* Block: hero-banner
  * "imagebottom" teaser: full-bleed photographic banner with a white content
  * box overlapping the bottom of the image. Values extracted from source
- * computed styles (wknd.site) at 1280px viewport.
+ * computed styles + getBoundingClientRect (wknd.site) at 1440px and 375px.
  */
 
 /* full-bleed: neutralize section max-width + padding so the banner spans edge to edge */
@@ -14,7 +14,7 @@
   position: relative;
 }
 
-/* image row — full-width banner in normal flow */
+/* image row -- full-width banner in normal flow */
 .hero-banner > div:first-child {
   margin: 0;
   line-height: 0;
@@ -27,43 +27,52 @@
 .hero-banner img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 250px; /* source mobile image height */
   object-fit: cover;
-  aspect-ratio: 2 / 1;
 }
 
 /* white content box overlapping the bottom of the image */
 .hero-banner-content {
   position: relative;
   z-index: 1;
-  margin: -32px 16px 0;
-  padding: 12px 24px 18px;
+  box-sizing: border-box;
+  display: flow-root; /* contain child margins so the 18px top/bottom rhythm stays inside the box */
+  width: 100%;
+  margin: 0;
+  padding: 0 14px; /* source mobile inset */
   background-color: var(--background-color);
 }
 
 .hero-banner-content h2 {
-  margin: 0;
+  margin: 18px 0 0;
   font-family: var(--heading-font-family);
+  font-size: 36px;
   font-weight: 400;
+  line-height: 54px;
+  color: var(--text-color);
 }
 
 .hero-banner-content p {
   margin: 0;
-  font-size: var(--body-font-size-m);
-  line-height: 1.75;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  line-height: 31.5px;
   color: var(--text-color);
 }
 
-/* CTA paragraph (button) sits below the description */
-.hero-banner-content p:last-child {
-  margin-top: 18px;
+/* CTA paragraph (button) sits below the description: 18px above and below */
+.hero-banner-content .button-container {
+  margin: 18px 0;
+}
+
+/* match source CTA metrics exactly (global a.button provides bg/size/uppercase) */
+.hero-banner-content a.button:any-link {
+  border: 0; /* source CTA has no border; global rule adds 2px, inflating size by 4px */
+  line-height: 21px;
+  letter-spacing: normal;
 }
 
 /* no-image fallback: plain text block, no overlay */
-.hero-banner.no-image {
-  min-height: unset;
-}
-
 .hero-banner.no-image .hero-banner-content {
   margin: 0;
   padding: 0;
@@ -71,8 +80,14 @@
 }
 
 @media (width >= 900px) {
+  .hero-banner img {
+    height: 640px; /* source desktop image height */
+  }
+
   .hero-banner-content {
-    margin: -180px 44px 0;
-    padding: 18px 28px;
+    width: auto;
+    max-width: 1192px;
+    margin: -180px auto 0; /* overlap image bottom by 180px, centered box */
+    padding: 0 28px;
   }
 }
