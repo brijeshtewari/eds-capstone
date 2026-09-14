@@ -5,13 +5,17 @@
   --wknd-dark: #202020;
 }
 
-/* The boilerplate sets a fixed `header { height: var(--nav-height) }` (64px);
-   the WKND header is two rows (utility bar + main), so let it size to content. */
+/* The <header> reserves --nav-height of space in flow; the actual bar floats.
+   (Matches the WKND source: fixed/floating header pinned to the top.) */
 header.header-wrapper {
-  height: auto;
+  height: var(--nav-height);
 }
 
+/* Floating header bar — fixed to the top, overlaying content, like the source. */
 header .nav-wrapper {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 1030;
   width: 100%;
   background-color: #fff;
 }
