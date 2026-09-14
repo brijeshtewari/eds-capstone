@@ -36,7 +36,7 @@ footer .footer-brand {
 }
 
 footer .footer-brand img {
-  height: 40px;
+  height: 48px; /* match source footer logo */
   width: auto;
 }
 
@@ -49,6 +49,7 @@ footer .footer-nav ul {
 footer .footer-nav a {
   display: inline-block;
   padding: 8px 4px;
+  color: #ebebeb; /* light, like source (overrides global dark link color) */
   font-size: 14px;
   text-transform: uppercase;
 }
@@ -107,7 +108,7 @@ footer .footer-legal {
   padding-top: 16px;
   font-size: 12px;
   line-height: 1.6;
-  color: rgb(235 235 235 / 80%);
+  color: #f7f7f7;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
