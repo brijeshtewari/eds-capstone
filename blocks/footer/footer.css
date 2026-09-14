@@ -65,7 +65,11 @@ footer .footer-social {
 
 footer .footer-social h4 {
   margin: 0 0 12px;
+  color: #ebebeb; /* override global h1-h6 dark color */
+  font-family: inherit;
+  font-weight: 700;
   font-size: 16px;
+  line-height: 1.5;
   text-transform: uppercase;
 }
 
@@ -114,17 +118,36 @@ footer .footer-legal a:focus {
 /* desktop */
 @media (width >= 900px) {
   footer .footer-inner {
-    padding: 24px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    max-width: 1136px;
+    padding: 16px;
   }
 
+  /* top row: logo + nav (left) grow, social pinned right */
   footer .footer-brand {
+    flex: 1 1 auto;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    gap: 48px;
+    padding-bottom: 0;
   }
 
   footer .footer-nav ul {
     flex-direction: row;
     gap: 24px;
+  }
+
+  footer .footer-social {
+    flex: 0 0 auto;
+    padding: 0;
+    text-align: left;
+  }
+
+  /* legal spans the full width on its own row below */
+  footer .footer-legal {
+    flex: 1 1 100%;
+    margin-top: 16px;
   }
 }
