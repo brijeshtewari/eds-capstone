@@ -25,9 +25,8 @@ function fixImagePaths(scope) {
   });
 }
 
-/** Build the locale dropdown from the utility section's country list. */
-function decorateLocale(utilitySection) {
-  const list = utilitySection.querySelector('ul');
+/** Build the locale dropdown from the country list (a <ul> of countries). */
+function decorateLocale(list) {
   if (!list) return null;
 
   const wrapper = document.createElement('div');
@@ -93,49 +92,54 @@ export default async function decorate(block) {
   if (!fragment) return;
   fixImagePaths(fragment);
 
-  // The fragment may arrive wrapped (<body><main>…) on localhost or as bare
-  // top-level <div>s on DA/EDS. Prefer the wrapped scope, fall back to the
-  // parsed container's own direct children.
+  // Content-driven: DA/EDS may collapse the source's two section <div>s into a
+  // single flat sequence of <p>/<ul>, so locate each piece by what it IS rather
+  // than by section index.
   const scope = fragment.querySelector('main') || fragment.querySelector('body') || fragment;
-  const sections = [...scope.children]
-    .filter((el) => el.tagName === 'DIV' && !el.classList.contains('metadata'));
+  const lists = [...scope.querySelectorAll('ul')];
+  // Locale list = the <ul> with flag images and/or nested country sub-lists.
+  const localeList = lists.find((ul) => ul.querySelector('img') || ul.querySelector('ul')) || null;
+  // Primary nav list = a top-level <ul> that isn't the locale list (and isn't nested).
+  const navList = lists.find((ul) => ul !== localeList && !ul.closest('li')) || null;
+  // Sign In = link pointing at the sign-in anchor (fallback: first imageless link).
+  const signIn = scope.querySelector('a[href*="sign-in" i]')
+    || [...scope.querySelectorAll('p a')].find((a) => !a.querySelector('img') && !a.closest('ul'));
+  // Logo = the <p> link that wraps an image/picture.
+  const logoLink = [...scope.querySelectorAll('p a')].find((a) => a.querySelector('img, picture'));
 
   const nav = document.createElement('nav');
   nav.id = 'nav';
   nav.setAttribute('aria-label', 'Main navigation');
 
-  // --- Utility bar (first section): sign-in + locale ---
-  const utilitySection = sections[0];
-  if (utilitySection) {
+  // --- Utility bar: sign-in + locale ---
+  if (signIn || localeList) {
     const utility = document.createElement('div');
     utility.className = 'nav-utility';
     const inner = document.createElement('div');
     inner.className = 'nav-utility-inner';
 
-    const signIn = utilitySection.querySelector('p a');
     if (signIn) {
       const link = signIn.cloneNode(true);
       link.classList.add('nav-signin');
       inner.append(link);
     }
 
-    const locale = decorateLocale(utilitySection);
-    if (locale) inner.append(locale);
+    if (localeList) {
+      const locale = decorateLocale(localeList);
+      if (locale) inner.append(locale);
+    }
 
     utility.append(inner);
     nav.append(utility);
   }
 
-  // --- Main header (second section): logo + nav links + search ---
-  const mainSection = sections[1];
-  if (mainSection) {
+  // --- Main header: logo + nav links + search ---
+  {
     const main = document.createElement('div');
     main.className = 'nav-main';
     const inner = document.createElement('div');
     inner.className = 'nav-main-inner';
 
-    // logo (first <p> link containing an image)
-    const logoLink = [...mainSection.querySelectorAll('p a')].find((a) => a.querySelector('img'));
     if (logoLink) {
       const brand = document.createElement('div');
       brand.className = 'nav-brand';
@@ -152,10 +156,9 @@ export default async function decorate(block) {
     hamburger.innerHTML = '<span class="nav-hamburger-icon"></span>';
 
     // primary nav links + search
-    const linkList = mainSection.querySelector('ul');
     const sectionsWrap = document.createElement('div');
     sectionsWrap.className = 'nav-sections';
-    if (linkList) sectionsWrap.append(linkList.cloneNode(true));
+    if (navList) sectionsWrap.append(navList.cloneNode(true));
     sectionsWrap.append(decorateSearch());
 
     hamburger.addEventListener('click', () => {
