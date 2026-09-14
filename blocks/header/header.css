@@ -54,8 +54,8 @@ header .nav-utility-inner {
 }
 
 header .nav-utility a {
-  color: #fff;
-  font-size: 13px;
+  color: #ebebeb;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
@@ -75,9 +75,9 @@ header .nav-locale-toggle {
   gap: 8px;
   background: none;
   border: 0;
-  color: #fff;
+  color: #ebebeb;
   font: inherit;
-  font-size: 13px;
+  font-size: 14px;
   text-transform: uppercase;
   cursor: pointer;
   padding: 0;
@@ -236,14 +236,15 @@ header .nav-sections > ul > li > a:focus {
   background-color: var(--wknd-brand-yellow);
 }
 
-/* search */
+/* search — borderless with a light translucent field, like the source */
 header .nav-search {
   display: flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid #ccc;
-  padding: 8px 12px;
+  box-sizing: border-box;
+  padding: 0 12px;
   margin-top: 8px;
+  background-color: rgb(235 235 235 / 54%);
 }
 
 header .nav-search-icon {
@@ -261,6 +262,7 @@ header .nav-search input {
   font-size: 14px;
   flex: 1;
   min-width: 0;
+  height: 42px;
   background: transparent;
 }
 
@@ -300,6 +302,6 @@ header .nav-search input {
 
   header .nav-search {
     margin-top: 0;
-    min-width: 220px;
+    width: 166px; /* match source search field width */
   }
 }
