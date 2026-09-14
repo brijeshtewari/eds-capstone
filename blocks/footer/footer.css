@@ -75,13 +75,18 @@ footer .footer-social h4 {
 
 footer .footer-social-list {
   display: flex;
+  align-items: center;
   gap: 16px;
 }
 
 footer .footer-social-list img {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   display: block;
+
+  /* source icons are light on the dark footer; the source SVGs are dark
+     artwork, so invert them to near-white to match */
+  filter: brightness(0) invert(0.92);
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -107,6 +112,7 @@ footer .footer-legal {
 
 /* stylelint-disable-next-line no-descending-specificity */
 footer .footer-legal a {
+  color: #f7f7f7; /* light, like source (overrides global dark link color) */
   text-decoration: underline;
 }
 
