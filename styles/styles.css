@@ -118,6 +118,35 @@ main .default-content-wrapper h2::after {
   border-bottom: 2px solid var(--brand-primary);
 }
 
+/* WKND CTA: a default-content paragraph whose sole child is a link renders as
+   a solid yellow button (e.g. "All Articles", "All Trips"). */
+main .default-content-wrapper p > a:only-child {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 14px 35px;
+  background-color: var(--brand-primary);
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+main .default-content-wrapper p > a:only-child:hover,
+main .default-content-wrapper p > a:only-child:focus-visible {
+  background-color: #e6d200;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+/* WKND section divider: a light rule closing default-content sections that end
+   with a trailing CTA (e.g. the Recent Articles / Where-to-go sections). */
+main .section.cards-article-container {
+  border-bottom: 1px solid #ebebeb;
+}
+
 p,
 dl,
 ol,
@@ -159,12 +188,14 @@ button {
 }
 
 /* links */
+/* stylelint-disable-next-line no-descending-specificity */
 a:any-link {
   color: var(--link-color);
   text-decoration: none;
   overflow-wrap: break-word;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 a:hover {
   color: var(--link-hover-color);
   text-decoration: underline;
