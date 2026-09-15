@@ -4,6 +4,96 @@
   },
   "templates": [
     {
+      "name": "adventures",
+      "urls": [
+        "https://wknd.site/us/en/adventures.html"
+      ],
+      "representativeUrl": "https://wknd.site/us/en/adventures.html",
+      "description": "WKND Adventures listing page: hero teaser + interactive category-filter (tabs) whose panels hold adventure card grids.",
+      "blocks": [
+        {
+          "name": "hero-banner",
+          "instances": [
+            ".teaser.cmp-teaser--hero"
+          ]
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            ".image-list.list"
+          ]
+        },
+        {
+          "name": "tabs-filter",
+          "instances": [
+            ".tabs.panelcontainer"
+          ]
+        }
+      ],
+      "urlPattern": "/us/en/adventures",
+      "sections": [
+        {
+          "id": "section-1-page-title",
+          "name": "page-title",
+          "selector": [
+            ".title:not(.cmp-title--underline)"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".title .cmp-title__text"
+          ]
+        },
+        {
+          "id": "section-2-hero-teaser",
+          "name": "hero-teaser",
+          "selector": [
+            ".teaser.cmp-teaser--hero"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-banner"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3-current-adventures-title",
+          "name": "current-adventures-title",
+          "selector": [
+            ".title.cmp-title--underline"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".title.cmp-title--underline .cmp-title__text"
+          ]
+        },
+        {
+          "id": "section-4-adventures-browser",
+          "name": "adventures-browser",
+          "selector": [
+            ".tabs.panelcontainer"
+          ],
+          "style": null,
+          "blocks": [
+            "tabs-filter",
+            "cards-article"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-5-trailing-separator",
+          "name": "trailing-separator",
+          "selector": [
+            ".separator"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
       "name": "home",
       "urls": [
         "https://wknd.site/us/en.html"
@@ -116,7 +206,7 @@
         "https://wknd.site/us/en/magazine.html"
       ],
       "representativeUrl": "https://wknd.site/us/en/magazine.html",
-      "description": "WKND Magazine landing page: featured article promo, recent-articles card grid, and a members-only two-up promo grid.",
+      "description": "To be named in naming step",
       "blocks": [
         {
           "name": "columns-featured",
@@ -137,7 +227,6 @@
           ]
         }
       ],
-      "urlPattern": "/us/en/magazine",
       "sections": [
         {
           "id": "section-1-featured-article",
@@ -183,7 +272,8 @@
             ".separator.cmp-separator--space-medium"
           ]
         }
-      ]
+      ],
+      "urlPattern": "/us/en/*"
     }
   ]
 }

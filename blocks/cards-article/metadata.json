@@ -3,13 +3,17 @@
   "baseBlock": "cards",
   "visualCharacteristics": "Four-up grid of borderless article cards, each with an image on top and a bold title with a short description below.",
   "contentPattern": "One row per card. Each row has an image cell and a body cell (title + short description).",
-  "usage": "Article and adventure listing grids ('Recent Articles', 'Where do you want to go?').",
+  "usage": {
+    "pagesUsing": [
+      "/us/en/magazine",
+      "/us/en/adventures"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-09-15"
+  },
   "canonicalModel": "standalone",
   "options": [],
-  "memberVariantIds": ["cards-article"],
-  "usage": {
-    "pagesUsing": ["/us/en/magazine"],
-    "reuseCount": 1,
-    "lastUsed": "2026-09-14"
-  }
+  "memberVariantIds": [
+    "cards-article"
+  ]
 }
