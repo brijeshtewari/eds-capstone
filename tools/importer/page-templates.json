@@ -4,12 +4,116 @@
   },
   "templates": [
     {
+      "name": "adventures-2",
+      "urls": [
+        "https://wknd.site/us/en/adventures/bali-surf-camp.html",
+        "https://wknd.site/us/en/adventures/beervana-portland.html",
+        "https://wknd.site/us/en/adventures/climbing-new-zealand.html",
+        "https://wknd.site/us/en/adventures/colorado-rock-climbing.html",
+        "https://wknd.site/us/en/adventures/cycling-southern-utah.html",
+        "https://wknd.site/us/en/adventures/cycling-tuscany.html",
+        "https://wknd.site/us/en/adventures/downhill-skiing-wyoming.html",
+        "https://wknd.site/us/en/adventures/gastronomic-marais-tour.html",
+        "https://wknd.site/us/en/adventures/napa-wine-tasting.html",
+        "https://wknd.site/us/en/adventures/riverside-camping-australia.html",
+        "https://wknd.site/us/en/adventures/ski-touring-mont-blanc.html",
+        "https://wknd.site/us/en/adventures/surf-camp-costa-rica.html",
+        "https://wknd.site/us/en/adventures/tahoe-skiing.html",
+        "https://wknd.site/us/en/adventures/west-coast-cycling.html",
+        "https://wknd.site/us/en/adventures/whistler-mountain-biking.html",
+        "https://wknd.site/us/en/adventures/yosemite-backpacking.html"
+      ],
+      "representativeUrl": "https://wknd.site/us/en/adventures/bali-surf-camp.html",
+      "description": "WKND adventure detail page: image gallery, activity spec panel, and a tabbed content switcher (Overview/Itinerary/What to Bring).",
+      "blocks": [
+        {
+          "name": "carousel-gallery",
+          "instances": [
+            ".carousel.panelcontainer.cmp-carousel--mini"
+          ]
+        },
+        {
+          "name": "columns-details",
+          "instances": [
+            ".contentfragment.cmp-contentfragment--elements"
+          ]
+        },
+        {
+          "name": "tabs-content",
+          "instances": [
+            ".tabs.panelcontainer"
+          ]
+        }
+      ],
+      "urlPattern": "/us/en/adventures/*",
+      "sections": [
+        {
+          "id": "section-1-breadcrumb",
+          "name": "breadcrumb",
+          "selector": [
+            ".breadcrumb.cmp-breadcrumb--fixed"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2-hero-carousel",
+          "name": "hero-carousel",
+          "selector": [
+            ".carousel.panelcontainer.cmp-carousel--mini"
+          ],
+          "style": null,
+          "blocks": [
+            "carousel-gallery"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3-page-title",
+          "name": "page-title",
+          "selector": [
+            ".title.cmp-title--underline"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".title.cmp-title--underline .cmp-title__text"
+          ]
+        },
+        {
+          "id": "section-4-activity-details",
+          "name": "activity-details",
+          "selector": [
+            ".contentfragment.cmp-contentfragment--elements"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-details"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-5-detail-tabs",
+          "name": "detail-tabs",
+          "selector": [
+            ".tabs.panelcontainer"
+          ],
+          "style": null,
+          "blocks": [
+            "tabs-content"
+          ],
+          "defaultContent": []
+        }
+      ]
+    },
+    {
       "name": "adventures",
       "urls": [
         "https://wknd.site/us/en/adventures.html"
       ],
       "representativeUrl": "https://wknd.site/us/en/adventures.html",
-      "description": "WKND Adventures listing page: hero teaser + interactive category-filter (tabs) whose panels hold adventure card grids.",
+      "description": "To be named in naming step",
       "blocks": [
         {
           "name": "hero-banner",
@@ -30,7 +134,6 @@
           ]
         }
       ],
-      "urlPattern": "/us/en/adventures",
       "sections": [
         {
           "id": "section-1-page-title",
@@ -91,7 +194,8 @@
           "blocks": [],
           "defaultContent": []
         }
-      ]
+      ],
+      "urlPattern": "/us/en/*"
     },
     {
       "name": "home",
@@ -199,6 +303,83 @@
         }
       ],
       "urlPattern": "/us/*"
+    },
+    {
+      "name": "magazine-2",
+      "urls": [
+        "https://wknd.site/us/en/magazine/arctic-surfing.html",
+        "https://wknd.site/us/en/magazine/guide-la-skateparks.html",
+        "https://wknd.site/us/en/magazine/san-diego-surf.html",
+        "https://wknd.site/us/en/magazine/ski-touring.html",
+        "https://wknd.site/us/en/magazine/western-australia.html"
+      ],
+      "representativeUrl": "https://wknd.site/us/en/magazine/arctic-surfing.html",
+      "description": "WKND magazine article: lead image, editorial rich-text body, author bio, and an up-next sidebar. Entirely default content — no blocks.",
+      "blocks": [],
+      "urlPattern": "/us/en/magazine/*",
+      "sections": [
+        {
+          "id": "section-1-lead-image",
+          "name": "lead-image",
+          "selector": [
+            ".image.aem-GridColumn",
+            "main .cmp-image"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".cmp-image__image"
+          ]
+        },
+        {
+          "id": "section-2-breadcrumb",
+          "name": "breadcrumb",
+          "selector": [
+            ".breadcrumb",
+            ".cmp-breadcrumb"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3-article-body",
+          "name": "article-body",
+          "selector": [
+            ".contentfragment",
+            ".cmp-contentfragment"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".cmp-contentfragment__element"
+          ]
+        },
+        {
+          "id": "section-4-author-bio",
+          "name": "author-bio",
+          "selector": [
+            ".experiencefragment .cmp-byline",
+            ".cmp-byline"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".cmp-byline"
+          ]
+        },
+        {
+          "id": "section-5-sidebar",
+          "name": "sidebar",
+          "selector": [
+            "aside.cmp-layoutcontainer--sidebar",
+            "aside"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": []
+        }
+      ]
     },
     {
       "name": "magazine",
