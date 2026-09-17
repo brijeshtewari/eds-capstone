@@ -1,6 +1,80 @@
 // media query match that indicates desktop width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
+// Nav section root: the primary nav is built from the query index, showing the
+// direct children of this path (e.g. /us/en/magazine, /us/en/adventures). Any
+// newly published section page under it appears automatically.
+const NAV_ROOT = '/us/en';
+
+// Curated ordering for known WKND sections; anything not listed sorts after,
+// alphabetically. A page's `nav-order` metadata (numeric) overrides this.
+const NAV_ORDER = ['magazine', 'adventures', 'faqs', 'about-us'];
+
+/**
+ * Build the primary nav list from the query index. Returns a <ul> of links to
+ * the direct child sections of NAV_ROOT, or null when the index is unavailable
+ * (callers fall back to the nav fragment's own list).
+ */
+async function buildNavListFromIndex() {
+  let resp;
+  try {
+    resp = await fetch('/query-index.json');
+  } catch (e) {
+    return null;
+  }
+  if (!resp || !resp.ok) return null;
+  const { data } = await resp.json();
+  if (!Array.isArray(data)) return null;
+
+  const rootDepth = NAV_ROOT.split('/').filter(Boolean).length;
+  const sections = data
+    // direct children of NAV_ROOT only (exactly one path segment deeper)
+    .filter((row) => {
+      const path = (row.path || '').replace(/\/$/, '');
+      if (!path.startsWith(`${NAV_ROOT}/`)) return false;
+      return path.split('/').filter(Boolean).length === rootDepth + 1;
+    })
+    // respect robots noindex (BYOM indexes everything; filter client-side)
+    .filter((row) => !/noindex/i.test(row.robots || ''))
+    .map((row) => {
+      const path = row.path.replace(/\/$/, '');
+      const slug = path.split('/').pop();
+      const label = (row.navtitle || row.title || slug).trim();
+      const order = Number.parseInt(row.navorder, 10);
+      return {
+        path, slug, label, order,
+      };
+    });
+
+  if (!sections.length) return null;
+
+  sections.sort((a, b) => {
+    // explicit numeric nav-order wins
+    const ao = Number.isNaN(a.order) ? Infinity : a.order;
+    const bo = Number.isNaN(b.order) ? Infinity : b.order;
+    if (ao !== bo) return ao - bo;
+    // then curated order for known sections
+    const ai = NAV_ORDER.indexOf(a.slug);
+    const bi = NAV_ORDER.indexOf(b.slug);
+    const ar = ai === -1 ? Infinity : ai;
+    const br = bi === -1 ? Infinity : bi;
+    if (ar !== br) return ar - br;
+    // finally alphabetical by label
+    return a.label.localeCompare(b.label);
+  });
+
+  const ul = document.createElement('ul');
+  sections.forEach((section) => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = section.path;
+    a.textContent = section.label;
+    li.append(a);
+    ul.append(li);
+  });
+  return ul;
+}
+
 /**
  * Fetch the nav fragment. Metadata-independent dual-fetch:
  * /content first (localhost / aem up), then root (DA/EDS production).
@@ -97,7 +171,10 @@ function decorateSearch() {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  const fragment = await fetchNavFragment();
+  const [fragment, indexNavList] = await Promise.all([
+    fetchNavFragment(),
+    buildNavListFromIndex(),
+  ]);
   block.textContent = '';
   if (!fragment) return;
   fixImagePaths(fragment);
@@ -109,8 +186,10 @@ export default async function decorate(block) {
   const lists = [...scope.querySelectorAll('ul')];
   // Locale list = the <ul> with flag images and/or nested country sub-lists.
   const localeList = lists.find((ul) => ul.querySelector('img') || ul.querySelector('ul')) || null;
-  // Primary nav list = a top-level <ul> that isn't the locale list (and isn't nested).
-  const navList = lists.find((ul) => ul !== localeList && !ul.closest('li')) || null;
+  // Primary nav list: prefer the index-built list (auto-includes new pages);
+  // fall back to a top-level <ul> from the fragment that isn't the locale list.
+  const fragmentNavList = lists.find((ul) => ul !== localeList && !ul.closest('li')) || null;
+  const navList = indexNavList || fragmentNavList;
   // Sign In = link pointing at the sign-in anchor (fallback: first imageless link).
   const signIn = scope.querySelector('a[href*="sign-in" i]')
     || [...scope.querySelectorAll('p a')].find((a) => !a.querySelector('img') && !a.closest('ul'));
