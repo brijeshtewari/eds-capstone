@@ -5,10 +5,11 @@
   --wknd-dark: #202020;
 }
 
-/* The <header> reserves --nav-height of space in flow; the actual bar floats.
-   (Matches the WKND source: fixed/floating header pinned to the top.) */
+/* The <header> reserves header height of space in flow; the actual bar floats.
+   (Matches the WKND source: fixed/floating header pinned to the top.)
+   Mobile is shorter (~117px); desktop uses the full --nav-height (193px). */
 header.header-wrapper {
-  height: var(--nav-height);
+  height: 117px; /* source mobile header height */
 }
 
 /* Floating header bar — fixed to the top, overlaying content, like the source. */
@@ -147,14 +148,14 @@ header .nav-main-inner {
   justify-content: space-between;
   gap: 16px;
   max-width: 1164px;
-  min-height: 168px; /* match WKND source main-header band (total header ~194px) */
+  min-height: 96px; /* source mobile main-header band (total mobile header ~117px) */
   margin: 0 auto;
   padding: 0 14px;
   box-sizing: border-box;
 }
 
 header .nav-brand img {
-  height: 48px;
+  height: 36px; /* source mobile logo height */
   width: auto;
   display: block;
 }
@@ -268,6 +269,19 @@ header .nav-search input {
 
 /* --- Desktop --- */
 @media (width >= 900px) {
+  /* Restore the taller desktop header dimensions (source: ~193px band, 48px logo). */
+  header.header-wrapper {
+    height: var(--nav-height);
+  }
+
+  header .nav-main-inner {
+    min-height: 168px;
+  }
+
+  header .nav-brand img {
+    height: 48px;
+  }
+
   header .nav-hamburger {
     display: none;
   }
@@ -298,6 +312,7 @@ header .nav-search input {
     padding: 8px 12px;
     font-size: 14px;
     font-weight: 400;
+    line-height: 21px; /* source nav link line-height (was inheriting 1.6 → 22.4px) */
   }
 
   header .nav-search {
