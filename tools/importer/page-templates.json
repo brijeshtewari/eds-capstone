@@ -4,6 +4,81 @@
   },
   "templates": [
     {
+      "name": "magazine",
+      "urls": [
+        "https://wknd.site/us/en/magazine.html"
+      ],
+      "representativeUrl": "https://wknd.site/us/en/magazine.html",
+      "description": "To be named in naming step",
+      "blocks": [
+        {
+          "name": "columns-featured",
+          "instances": [
+            ".teaser.cmp-teaser--featured"
+          ]
+        },
+        {
+          "name": "cards-article",
+          "instances": [
+            ".image-list.list"
+          ]
+        },
+        {
+          "name": "cards-promo",
+          "instances": [
+            ".teaser.cmp-teaser--secure"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1-featured-article",
+          "name": "featured-article",
+          "selector": [
+            ".teaser.cmp-teaser--featured"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-featured"
+          ],
+          "defaultContent": [
+            ".title.aem-GridColumn:nth-of-type(1)"
+          ]
+        },
+        {
+          "id": "section-2-all-articles",
+          "name": "all-articles",
+          "selector": [
+            ".image-list.list"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-article"
+          ],
+          "defaultContent": [
+            ".title.cmp-title--underline:nth-of-type(3)"
+          ]
+        },
+        {
+          "id": "section-3-members-only",
+          "name": "members-only",
+          "selector": [
+            ".teaser.cmp-teaser--secure"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-promo"
+          ],
+          "defaultContent": [
+            ".title.cmp-title--underline:nth-of-type(5)",
+            ".text",
+            ".separator.cmp-separator--space-medium"
+          ]
+        }
+      ],
+      "urlPattern": "/us/en/*"
+    },
+    {
       "name": "adventures-2",
       "urls": [
         "https://wknd.site/us/en/adventures/bali-surf-camp.html",
@@ -203,7 +278,7 @@
         "https://wknd.site/us/en/faqs.html"
       ],
       "representativeUrl": "https://wknd.site/us/en/faqs.html",
-      "description": "WKND FAQs page: title, hero image, intro paragraph, an expandable Q&A accordion, and a Need more help? contact panel.",
+      "description": "To be named in naming step",
       "blocks": [
         {
           "name": "accordion-faq",
@@ -212,7 +287,6 @@
           ]
         }
       ],
-      "urlPattern": "/us/en/faqs",
       "sections": [
         {
           "id": "section-1-faq-main",
@@ -245,7 +319,8 @@
             ".cmp-text"
           ]
         }
-      ]
+      ],
+      "urlPattern": "/us/en/*"
     },
     {
       "name": "home",
@@ -432,79 +507,39 @@
       "urlPattern": "/us/en/magazine/*"
     },
     {
-      "name": "magazine",
+      "name": "about-us",
       "urls": [
-        "https://wknd.site/us/en/magazine.html"
+        "https://wknd.site/us/en/about-us.html"
       ],
-      "representativeUrl": "https://wknd.site/us/en/magazine.html",
-      "description": "To be named in naming step",
+      "representativeUrl": "https://wknd.site/us/en/about-us.html",
+      "description": "WKND About Us page: title and two contributor grids (Our Contributors, WKND Guides) of profile cards.",
       "blocks": [
         {
-          "name": "columns-featured",
+          "name": "cards-profile",
           "instances": [
-            ".teaser.cmp-teaser--featured"
-          ]
-        },
-        {
-          "name": "cards-article",
-          "instances": [
-            ".image-list.list"
-          ]
-        },
-        {
-          "name": "cards-promo",
-          "instances": [
-            ".teaser.cmp-teaser--secure"
+            ".experiencefragment.cmp-experience-fragment--contributor"
           ]
         }
       ],
       "sections": [
         {
-          "id": "section-1-featured-article",
-          "name": "featured-article",
+          "id": "section-1-about",
+          "name": "about",
           "selector": [
-            ".teaser.cmp-teaser--featured"
+            "main .aem-Grid",
+            "main"
           ],
           "style": null,
           "blocks": [
-            "columns-featured"
+            "cards-profile"
           ],
           "defaultContent": [
-            ".title.aem-GridColumn:nth-of-type(1)"
-          ]
-        },
-        {
-          "id": "section-2-all-articles",
-          "name": "all-articles",
-          "selector": [
-            ".image-list.list"
-          ],
-          "style": null,
-          "blocks": [
-            "cards-article"
-          ],
-          "defaultContent": [
-            ".title.cmp-title--underline:nth-of-type(3)"
-          ]
-        },
-        {
-          "id": "section-3-members-only",
-          "name": "members-only",
-          "selector": [
-            ".teaser.cmp-teaser--secure"
-          ],
-          "style": null,
-          "blocks": [
-            "cards-promo"
-          ],
-          "defaultContent": [
-            ".title.cmp-title--underline:nth-of-type(5)",
-            ".text",
-            ".separator.cmp-separator--space-medium"
+            ".title.cmp-title--underline .cmp-title__text",
+            ".cmp-title__text"
           ]
         }
       ],
-      "urlPattern": "/us/en/*"
+      "urlPattern": "/us/en/about-us"
     }
   ]
 }
