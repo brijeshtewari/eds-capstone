@@ -1,7 +1,7 @@
 /*
  * cards-profile — contributor/team profile card grid.
- * Structural only: responsive multi-up grid, centered card content, portrait
- * on top with name, role, and a social-link row below.
+ * Centered cards: a circular portrait on top, name, role/occupation line, and a
+ * row of social icon tiles. Matches the WKND About Us contributor cards.
  */
 
 .cards-profile > ul {
@@ -10,23 +10,29 @@
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 40px 24px;
+  gap: 48px 24px;
 }
 
 .cards-profile > ul > li {
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-width: 0;
   text-align: center;
 }
 
+/* Circular portrait (source: ~164px round, cover). */
 .cards-profile .cards-profile-card-image {
   line-height: 0;
+  width: 164px;
+  max-width: 100%;
 }
 
 .cards-profile .cards-profile-card-image img {
-  width: 100%;
-  aspect-ratio: 3 / 2;
+  width: 164px;
+  height: 164px;
+  max-width: 100%;
+  border-radius: 50%;
   object-fit: cover;
 }
 
@@ -34,21 +40,56 @@
   margin-top: 16px;
 }
 
-.cards-profile .cards-profile-card-body :is(h2, h3, h4) {
-  margin: 8px 0 4px;
+/* Name — serif heading (source: 24px Asar). */
+.cards-profile .cards-profile-card-body h3 {
+  margin: 0 0 4px;
+  font-size: 24px;
 }
 
-.cards-profile .cards-profile-card-body :is(h5, h6) {
+/* Role — sans-serif, uppercase, semibold (source: 14px Source Sans Pro 600). */
+.cards-profile .cards-profile-card-body h5 {
   margin: 0 0 12px;
-  font-weight: 400;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
   text-transform: uppercase;
+  color: var(--text-color, #202020);
 }
 
-/* social-link row */
+/* Social row — centered icon tiles. */
 .cards-profile .cards-profile-card-social {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 8px;
+  margin: 0;
+}
+
+.cards-profile .cards-profile-social-link {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  background-color: var(--text-color, #202020);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: 22px 22px;
+  transition: opacity 0.2s;
+}
+
+.cards-profile .cards-profile-social-link:hover,
+.cards-profile .cards-profile-social-link:focus-visible {
+  opacity: 0.7;
+}
+
+.cards-profile .cards-profile-social-facebook {
+  mask-image: url('/icons/facebook.svg');
+}
+
+.cards-profile .cards-profile-social-twitter {
+  mask-image: url('/icons/twitter.svg');
+}
+
+.cards-profile .cards-profile-social-instagram {
+  mask-image: url('/icons/instagram.svg');
 }
 
 @media (width >= 600px) {
