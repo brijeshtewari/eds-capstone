@@ -113,15 +113,15 @@
     align-items: stretch;
   }
 
-  /* Text panel -- ~1/3 width */
+  /* Text panel -- ~37% width (source: 427 of 1164) */
   .columns-featured > div > div {
-    flex: 1;
+    flex: 37;
     padding: 63px 36px 36px;
   }
 
-  /* Image -- ~2/3 width */
+  /* Image -- ~61% width (source: 709 of 1164) */
   .columns-featured > div > .columns-featured-img-col {
-    flex: 2;
+    flex: 61;
     padding: 0;
   }
 }
