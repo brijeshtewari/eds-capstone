@@ -84,10 +84,20 @@
     height: 640px; /* source desktop image height */
   }
 
+  /* Overlay the white content box on the bottom of the image via absolute
+     positioning so the block height is always driven by the image (640px),
+     regardless of how tall the content is. A fixed negative top-margin only
+     lined up when the content happened to be ~180px tall; a shorter content
+     box (e.g. no CTA) shrank the block below the image, letting the image
+     overflow onto — and hide — the following section. */
   .hero-banner-content {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
     width: auto;
     max-width: 1192px;
-    margin: -180px auto 0; /* overlap image bottom by 180px, centered box */
-    padding: 0 28px;
+    margin: 0 auto;
+    padding: 28px 28px 0; /* white box covers the image's lower strip */
   }
 }
