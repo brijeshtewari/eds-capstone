@@ -377,3 +377,31 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+/* FAQ page: two-column layout (source parity).
+   The FAQ content (title, image, intro, accordion) fills the left ~2/3 column;
+   the "Need more help?" panel sits adjacent in the right ~1/3 column. Scoped to
+   pages that contain the accordion-faq block so it never affects other layouts. */
+@media (width >= 900px) {
+  main:has(.accordion-faq-container) {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+    column-gap: 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* first section (FAQ content) → left column; second (need more help) → right */
+  main:has(.accordion-faq-container) > .section {
+    margin: 0;
+    min-width: 0;
+  }
+
+  /* neutralize the default centered max-width container inside the grid tracks */
+  main:has(.accordion-faq-container) > .section > div {
+    max-width: none;
+    padding: 0;
+  }
+}
