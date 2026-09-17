@@ -24,7 +24,7 @@
         "https://wknd.site/us/en/adventures/yosemite-backpacking.html"
       ],
       "representativeUrl": "https://wknd.site/us/en/adventures/bali-surf-camp.html",
-      "description": "WKND adventure detail page: image gallery, activity spec panel, and a tabbed content switcher (Overview/Itinerary/What to Bring).",
+      "description": "To be named in naming step",
       "blocks": [
         {
           "name": "carousel-gallery",
@@ -45,7 +45,6 @@
           ]
         }
       ],
-      "urlPattern": "/us/en/adventures/*",
       "sections": [
         {
           "id": "section-1-breadcrumb",
@@ -105,7 +104,8 @@
           ],
           "defaultContent": []
         }
-      ]
+      ],
+      "urlPattern": "/us/en/adventures/*"
     },
     {
       "name": "adventures",
@@ -196,6 +196,56 @@
         }
       ],
       "urlPattern": "/us/en/*"
+    },
+    {
+      "name": "faqs",
+      "urls": [
+        "https://wknd.site/us/en/faqs.html"
+      ],
+      "representativeUrl": "https://wknd.site/us/en/faqs.html",
+      "description": "WKND FAQs page: title, hero image, intro paragraph, an expandable Q&A accordion, and a Need more help? contact panel.",
+      "blocks": [
+        {
+          "name": "accordion-faq",
+          "instances": [
+            ".accordion.panelcontainer"
+          ]
+        }
+      ],
+      "urlPattern": "/us/en/faqs",
+      "sections": [
+        {
+          "id": "section-1-faq-main",
+          "name": "faq-main",
+          "selector": [
+            ".container.responsivegrid.aem-GridColumn--default--8",
+            ".cmp-accordion"
+          ],
+          "style": null,
+          "blocks": [
+            "accordion-faq"
+          ],
+          "defaultContent": [
+            ".title.cmp-title--underline .cmp-title__text",
+            ".cmp-image__image",
+            ".text .cmp-text"
+          ]
+        },
+        {
+          "id": "section-2-need-help",
+          "name": "need-help",
+          "selector": [
+            ".container.responsivegrid.aem-GridColumn--default--3",
+            ".cmp-title--right"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".cmp-title__text",
+            ".cmp-text"
+          ]
+        }
+      ]
     },
     {
       "name": "home",
@@ -314,9 +364,8 @@
         "https://wknd.site/us/en/magazine/western-australia.html"
       ],
       "representativeUrl": "https://wknd.site/us/en/magazine/arctic-surfing.html",
-      "description": "WKND magazine article: lead image, editorial rich-text body, author bio, and an up-next sidebar. Entirely default content — no blocks.",
+      "description": "To be named in naming step",
       "blocks": [],
-      "urlPattern": "/us/en/magazine/*",
       "sections": [
         {
           "id": "section-1-lead-image",
@@ -379,7 +428,8 @@
           "blocks": [],
           "defaultContent": []
         }
-      ]
+      ],
+      "urlPattern": "/us/en/magazine/*"
     },
     {
       "name": "magazine",
