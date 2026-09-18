@@ -84,6 +84,25 @@ header .nav-locale-toggle {
   padding: 0;
 }
 
+/* Downward chevron after the locale code (matches source: a 6px box with
+   top+right borders rotated 135° into a caret). */
+header .nav-locale-toggle::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin-bottom: 2px; /* nudge the rotated caret to vertical center */
+  border-top: 1px solid #ebebeb;
+  border-right: 1px solid #ebebeb;
+  transform: rotate(135deg);
+}
+
+/* Flip the caret upward when the dropdown is open. */
+header .nav-locale.is-open .nav-locale-toggle::after {
+  margin-top: 2px;
+  margin-bottom: 0;
+  transform: rotate(-45deg);
+}
+
 header .nav-locale-toggle img {
   width: 20px;
   height: 14px;
