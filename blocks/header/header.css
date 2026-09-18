@@ -196,12 +196,17 @@ header nav.is-open .nav-hamburger-icon { background: transparent; }
 header nav.is-open .nav-hamburger-icon::before { transform: translateY(7px) rotate(45deg); }
 header nav.is-open .nav-hamburger-icon::after { transform: translateY(-7px) rotate(-45deg); }
 
-/* nav-sections breaks out of the .nav-main-inner 14px padding so the menu is edge-to-edge on mobile */
+/* nav-sections breaks out of the .nav-main-inner 14px padding so the menu is
+   edge-to-edge on mobile. Use auto width + negative side margins (not 100vw):
+   100vw includes the scrollbar, so with a scrollbar present it overshoots the
+   content edge and causes horizontal overflow when the drawer is open. Taking
+   the full flex row (100%) and pulling out the parent's 14px padding reaches
+   the true viewport edges using scrollbar-excluded widths. */
 header .nav-sections {
   order: 3;
   display: none;
-  flex: 0 0 100vw;
-  width: 100vw;
+  flex: 0 0 auto;
+  width: calc(100% + 28px); /* fill the row + reclaim the parent's 14px side padding */
   margin-left: -14px;
   margin-right: -14px;
 }
