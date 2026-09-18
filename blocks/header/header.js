@@ -111,8 +111,8 @@ function decorateLocale(list) {
   toggle.className = 'nav-locale-toggle';
   toggle.setAttribute('aria-expanded', 'false');
 
-  // Use the first country's flag + "Country code" as the current locale label
-  // (e.g. "United States en-US"), matching the source toggle.
+  // Current-locale label shows ONLY the locale code (e.g. "en-US"), matching the
+  // source toggle; the country name is used for the accessible label only.
   const firstItem = list.querySelector(':scope > li');
   const firstFlag = firstItem?.querySelector('img');
   const firstLocale = firstItem?.querySelector('ul a');
@@ -127,8 +127,10 @@ function decorateLocale(list) {
   const localeCode = firstLocale ? firstLocale.textContent.trim() : 'en-US';
   if (firstFlag) toggle.append(firstFlag.cloneNode(true));
   const label = document.createElement('span');
-  label.textContent = [countryName, localeCode].filter(Boolean).join(' ');
+  label.className = 'nav-locale-code';
+  label.textContent = localeCode;
   toggle.append(label);
+  toggle.setAttribute('aria-label', `Toggle language ${[countryName, localeCode].filter(Boolean).join(' ')}`.trim());
 
   const panel = document.createElement('div');
   panel.className = 'nav-locale-panel';
