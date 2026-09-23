@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* global WebImporter */
 /**
- * Parser for columns-featured. Base: columns.
+ * Parser for the Columns (featured) variant. Base: columns.
  * Source: https://wknd.site/us/en.html
  * Generated: 2026-09-12
  *
@@ -34,6 +34,6 @@ export default function parse(element, { document }) {
     [image || '', contentCell],
   ];
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'columns-featured', cells });
+  const block = WebImporter.Blocks.createBlock(document, { name: 'Columns (featured)', cells });
   element.replaceWith(block);
 }
