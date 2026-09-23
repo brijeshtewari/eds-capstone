@@ -60,7 +60,7 @@ var CustomImportScript = (() => {
     const cells = [
       [image || "", contentCell]
     ];
-    const block = WebImporter.Blocks.createBlock(document2, { name: "columns-featured", cells });
+    const block = WebImporter.Blocks.createBlock(document2, { name: "Columns (featured)", cells });
     element.replaceWith(block);
   }
 
@@ -135,7 +135,7 @@ var CustomImportScript = (() => {
       element.replaceWith(...element.childNodes);
       return;
     }
-    const block = WebImporter.Blocks.createBlock(document2, { name: "cards-promo", cells });
+    const block = WebImporter.Blocks.createBlock(document2, { name: "Cards (promo)", cells });
     element.replaceWith(block);
     group.slice(1).forEach((teaser) => teaser.remove());
   }

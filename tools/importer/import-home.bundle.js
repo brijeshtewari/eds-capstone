@@ -87,7 +87,7 @@ var CustomImportScript = (() => {
     const cells = [
       [image || "", contentCell]
     ];
-    const block = WebImporter.Blocks.createBlock(document2, { name: "columns-featured", cells });
+    const block = WebImporter.Blocks.createBlock(document2, { name: "Columns (featured)", cells });
     element.replaceWith(block);
   }
 
