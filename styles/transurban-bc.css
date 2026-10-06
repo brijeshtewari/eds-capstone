@@ -1,0 +1,132 @@
+.bc-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.bc-modal--open {
+    opacity: 1;
+    visibility: visible;
+}
+/* Backdrop */
+.bc-modal backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+}
+/* Modal Container */
+.bc-modal container {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 85vh;
+    max-height: 900px;
+    background: #DFDFDF;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+.bc-modal--open .bc-modal container {
+    transform: scale(1);
+}
+/* Modal Header */
+.bc-modal header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+.bc-modal close {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    color: #555555;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+    margin: 12px;
+}
+/* Create X icon with CSS */
+.bc-modal close::before,
+.bc-modal close::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background: currentColor;
+    top: 50%;
+    left: 50%;
+}
+.bc-modal close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.bc-modal close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+.bc-modal close:hover {
+    background: #F0F0F0;
+}
+.bc-modal close:focus {
+    outline: 2px solid #4B75FF;
+    outline-offset: 2px;
+}
+/* Modal Body */
+.bc-modal body {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    background: #DFDFDF;
+    border-radius: 0 0 12px 12px;
+    min-height: 0;
+}
+.bc-modal body #brand-concierge-mount {
+    width: 100%;
+    height: 100%;
+}
+
+/* Body scroll lock when modal is open */
+body.bc-modal-open {
+    overflow: hidden !important;
+}
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .bc-modal {
+        padding: 0;
+    }
+    .bc-modal container {
+        width: 100%;
+        height: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+    .bc-modal body {
+        border-radius: 0;
+    }
+}
