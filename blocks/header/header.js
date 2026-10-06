@@ -77,16 +77,18 @@ async function buildNavListFromIndex() {
 
 /**
  * Fetch the nav fragment. Metadata-independent dual-fetch:
- * /content first (localhost / aem up), then root (DA/EDS production).
+ * /content first on localhost (aem up), then root (DA/EDS production).
+ * /content isn't deployed, so skip it elsewhere to avoid a 404.
  */
 async function fetchNavFragment() {
-  let resp = await fetch('/content/nav.plain.html');
-  if (!resp.ok) resp = await fetch('/nav.plain.html');
+  let resp;
+  if (window.location.hostname.includes('localhost')) resp = await fetch('/content/nav.plain.html');
+  if (!resp?.ok) resp = await fetch('/nav.plain.html');
   if (!resp.ok) return null;
   const html = await resp.text();
-  const tmp = document.createElement('div');
-  tmp.innerHTML = html;
-  return tmp;
+  // Parse into an inert document so relative <img> srcs aren't requested
+  // (and 404 against the page URL) before fixImagePaths rewrites them.
+  return new DOMParser().parseFromString(html, 'text/html').body;
 }
 
 /** Rewrite relative image sources so they resolve from the site root. */
