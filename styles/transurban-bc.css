@@ -1,3 +1,5 @@
+/* stylelint-disable selector-type-no-unknown -- Preserve the existing Concierge custom element selectors. */
+
 .bc-modal {
     position: fixed;
     top: 0;
@@ -16,6 +18,7 @@
     transition: all 0.3s ease;
 }
 
+/* stylelint-disable-next-line selector-class-pattern -- Preserve the existing Concierge modifier class. */
 .bc-modal--open {
     opacity: 1;
     visibility: visible;
@@ -50,6 +53,7 @@
     transition: transform 0.3s ease;
 }
 
+/* stylelint-disable-next-line selector-class-pattern -- Preserve the existing Concierge modifier class. */
 .bc-modal--open .bc-modal container {
     transform: scale(1);
 }
