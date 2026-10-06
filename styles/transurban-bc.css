@@ -9,16 +9,18 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgb(0 0 0 / 60%);
     backdrop-filter: blur(4px);
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
 }
+
 .bc-modal--open {
     opacity: 1;
     visibility: visible;
 }
+
 /* Backdrop */
 .bc-modal backdrop {
     position: fixed;
@@ -29,6 +31,7 @@
     cursor: pointer;
     z-index: 1;
 }
+
 /* Modal Container */
 .bc-modal container {
     position: relative;
@@ -40,15 +43,17 @@
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgb(0 0 0 / 30%);
     z-index: 2;
     overflow: hidden;
     transform: scale(0.9);
     transition: transform 0.3s ease;
 }
+
 .bc-modal--open .bc-modal container {
     transform: scale(1);
 }
+
 /* Modal Header */
 .bc-modal header {
     display: flex;
@@ -56,13 +61,14 @@
     justify-content: flex-end;
     flex-shrink: 0;
 }
+
 .bc-modal close {
     position: relative;
     width: 40px;
     height: 40px;
     border: none;
     background: transparent;
-    color: #555555;
+    color: #555;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -72,6 +78,7 @@
     flex-shrink: 0;
     margin: 12px;
 }
+
 /* Create X icon with CSS */
 .bc-modal close::before,
 .bc-modal close::after {
@@ -79,33 +86,38 @@
     position: absolute;
     width: 20px;
     height: 2px;
-    background: currentColor;
+    background: currentcolor;
     top: 50%;
     left: 50%;
 }
+
 .bc-modal close::before {
     transform: translate(-50%, -50%) rotate(45deg);
 }
+
 .bc-modal close::after {
     transform: translate(-50%, -50%) rotate(-45deg);
 }
+
 .bc-modal close:hover {
     background: #F0F0F0;
 }
+
 .bc-modal close:focus {
     outline: 2px solid #4B75FF;
     outline-offset: 2px;
 }
+
 /* Modal Body */
 .bc-modal body {
     flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden auto;
     position: relative;
     background: #DFDFDF;
     border-radius: 0 0 12px 12px;
     min-height: 0;
 }
+
 .bc-modal body #brand-concierge-mount {
     width: 100%;
     height: 100%;
@@ -115,17 +127,20 @@
 body.bc-modal-open {
     overflow: hidden !important;
 }
+
 /* Mobile Responsive */
-@media (max-width: 768px) {
+@media (width <= 768px) {
     .bc-modal {
         padding: 0;
     }
+
     .bc-modal container {
         width: 100%;
         height: 100%;
         max-height: 100vh;
         border-radius: 0;
     }
+
     .bc-modal body {
         border-radius: 0;
     }
