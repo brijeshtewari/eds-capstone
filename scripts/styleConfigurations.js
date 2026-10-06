@@ -197,7 +197,7 @@ window.styleConfiguration = {
   },
   "assets": {
     "icons": {
-      "company": "https://www.mheducation.com/content/dam/mhe/corporate/logo-mcgraw-hill.svg"
+      "company": ""
     }
   },
   "visualProfile": {
