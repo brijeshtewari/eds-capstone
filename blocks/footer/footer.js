@@ -7,9 +7,9 @@ async function fetchFooterFragment() {
   if (!resp.ok) resp = await fetch('/footer.plain.html');
   if (!resp.ok) return null;
   const html = await resp.text();
-  const tmp = document.createElement('div');
-  tmp.innerHTML = html;
-  return tmp;
+  // Parse into an inert document so relative <img> srcs aren't requested
+  // (and 404 against the page URL) before fixImagePaths rewrites them.
+  return new DOMParser().parseFromString(html, 'text/html').body;
 }
 
 /** Rewrite relative image sources so they resolve from the site root. */
