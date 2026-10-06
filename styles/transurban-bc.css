@@ -149,3 +149,49 @@ body.bc-modal-open {
         border-radius: 0;
     }
 }
+
+/* Inline chat panel (brand-concierge block) */
+
+/*
+ * EDS names the block's section "brand-concierge-container", which is also the
+ * SDK's own scroll-container class, so the SDK's flex/overflow/::after styles
+ * leak onto the page section. Undo them there.
+ */
+.section.brand-concierge-container {
+    display: block;
+    overflow: visible;
+    animation: none;
+    background: none;
+}
+
+.section.brand-concierge-container::after {
+    content: none;
+}
+
+/* Fixed-height panel so the conversation scrolls inside it, not the page */
+main .brand-concierge #brand-concierge-mount {
+    box-sizing: border-box;
+    height: clamp(480px, calc(100dvh - 160px), 760px);
+    max-width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #e3e3e3;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
+}
+
+/* The SDK's container is the scroll area: its scroll-to-bottom button and
+   auto-scroll read scrollTop from it, and the input bar sticks to its bottom. */
+.brand-concierge .brand-concierge-container {
+    min-height: 0;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+}
+
+@media (width <= 768px) {
+    main .brand-concierge #brand-concierge-mount {
+        height: clamp(420px, calc(100dvh - 120px), 680px);
+        border-radius: 12px;
+    }
+}
