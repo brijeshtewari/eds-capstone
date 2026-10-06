@@ -2,10 +2,10 @@
   "type": "da",
   "sites": {
     "eds-capstone": {
+      "libraryUrl": "https://main--eds-capstone--brijeshtewari.aem.page/tools/sidekick/library.json",
       "previewOrg": "brijeshtewari",
       "previewSite": "eds-capstone",
-      "contentHostUrl": "https://content.da.live/brijeshtewari/eds-capstone/",
-      "libraryUrl": "https://main--eds-capstone--brijeshtewari.aem.page/tools/sidekick/library.json"
+      "contentHostUrl": "https://content.da.live/brijeshtewari/eds-capstone/"
     }
   }
 }
