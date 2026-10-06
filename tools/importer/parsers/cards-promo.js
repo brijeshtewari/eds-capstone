@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* global WebImporter */
 /**
- * Parser for cards-promo. Base: cards.
+ * Parser for the Cards (promo) variant. Base: cards.
  * Source: https://wknd.site/us/en/magazine.html
  * Generated: 2026-09-14
  *
@@ -68,7 +68,7 @@ export default function parse(element, { document }) {
     return;
   }
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'cards-promo', cells });
+  const block = WebImporter.Blocks.createBlock(document, { name: 'Cards (promo)', cells });
   element.replaceWith(block);
 
   // Remove the trailing sibling teasers now folded into the block above.
