@@ -150,7 +150,7 @@ body.bc-modal-open {
     }
 }
 
-/* Inline chat panel (brand-concierge block) */
+/* Floating chat panel (brand-concierge block) */
 
 /*
  * EDS names the block's section "brand-concierge-container", which is also the
@@ -168,17 +168,71 @@ body.bc-modal-open {
     content: none;
 }
 
-/* Fixed-height panel so the conversation scrolls inside it, not the page */
-main .brand-concierge #brand-concierge-mount {
+.brand-concierge .bc-floating-panel {
     box-sizing: border-box;
-    height: clamp(480px, calc(100dvh - 160px), 760px);
+    position: fixed;
+    z-index: 9999;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    left: 50%;
+    width: calc(100% - 40px);
     max-width: 960px;
-    margin: 0 auto;
+    transform: translateX(-50%);
     overflow: hidden;
     border: 1px solid #e3e3e3;
     border-radius: 16px;
     background: #fff;
-    box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 16%);
+}
+
+.brand-concierge .bc-floating-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 44px;
+    padding: 4px 12px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.brand-concierge .bc-floating-title {
+    font-weight: 600;
+}
+
+.brand-concierge .bc-floating-controls button {
+    margin: 0;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #06235b;
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.brand-concierge .bc-floating-controls button:hover {
+    background: #f2f2f2;
+}
+
+.brand-concierge .bc-floating-controls button:focus-visible {
+    outline: 2px solid #06235b;
+    outline-offset: -2px;
+}
+
+.brand-concierge .bc-floating-controls [hidden] {
+    display: none;
+}
+
+/* Keep the existing expanded chat dimensions and SDK conversation scroll area. */
+main .brand-concierge #brand-concierge-mount {
+    box-sizing: border-box;
+    height: clamp(480px, calc(100dvh - 160px), 760px);
+    max-height: calc(100dvh - 112px - env(safe-area-inset-bottom));
+    max-width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #fff;
 }
 
 /* The SDK's container is the scroll area: its scroll-to-bottom button and
@@ -189,9 +243,56 @@ main .brand-concierge #brand-concierge-mount {
     scrollbar-gutter: stable;
 }
 
+/* Collapse to the SDK's own composer, preserving drafts and conversation state. */
+main .brand-concierge .bc-floating-panel:not(.is-expanded) #brand-concierge-mount {
+    height: auto;
+    max-height: min(180px, calc(100dvh - 112px));
+    overflow-y: auto;
+}
+
+.brand-concierge .bc-floating-panel:not(.is-expanded) .brand-concierge-flex-wrapper,
+.brand-concierge .bc-floating-panel:not(.is-expanded) .brand-concierge-container,
+.brand-concierge .bc-floating-panel:not(.is-expanded) .chat-interface {
+    height: auto;
+    min-height: 0;
+    justify-content: flex-start;
+}
+
+.brand-concierge .bc-floating-panel:not(.is-expanded) .brand-concierge-container {
+    overflow: visible;
+    scrollbar-gutter: auto;
+}
+
+.brand-concierge .bc-floating-panel:not(.is-expanded) #brand-concierge-mount .chat-interface {
+    gap: 0;
+    padding: 0;
+}
+
+.brand-concierge .bc-floating-panel:not(.is-expanded) .disclaimer-bottom-page {
+    position: static;
+}
+
+.brand-concierge .bc-floating-panel:not(.is-expanded) .brand-concierge-container::after,
+.brand-concierge .bc-floating-panel:not(.is-expanded) .message-blocker,
+.brand-concierge .bc-floating-panel:not(.is-expanded) .chat-interface > :not(.input-section),
+.brand-concierge .bc-floating-panel:not(.is-expanded) .brand-concierge-flex-wrapper > :not(.brand-concierge-container) {
+    display: none;
+}
+
+.brand-concierge .bc-floating-panel:not(.is-expanded) .input-section {
+    position: static;
+    margin: 0 auto;
+    padding: 12px;
+}
+
 @media (width <= 768px) {
+    .brand-concierge .bc-floating-panel {
+        bottom: max(12px, env(safe-area-inset-bottom));
+        width: calc(100% - 24px);
+        border-radius: 12px;
+    }
+
     main .brand-concierge #brand-concierge-mount {
         height: clamp(420px, calc(100dvh - 120px), 680px);
-        border-radius: 12px;
     }
 }
