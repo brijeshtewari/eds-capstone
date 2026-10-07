@@ -175,7 +175,7 @@ body.bc-modal-open {
     bottom: max(20px, env(safe-area-inset-bottom));
     left: 50%;
     width: calc(100% - 40px);
-    max-width: 640px;
+    max-width: 960px;
     transform: translateX(-50%);
     overflow: hidden;
     border: 1px solid #e3e3e3;
@@ -230,7 +230,7 @@ main .brand-concierge #brand-concierge-mount {
     box-sizing: border-box;
     height: clamp(480px, calc(100dvh - 160px), 760px);
     max-height: calc(100dvh - 112px - env(safe-area-inset-bottom));
-    max-width: 640px;
+    max-width: 960px;
     margin: 0 auto;
     overflow: hidden;
     background: #fff;
@@ -244,8 +244,14 @@ main .brand-concierge #brand-concierge-mount {
     scrollbar-gutter: stable;
 }
 
+/* Keep image cards available when the SDK selects its compact layout. */
+.brand-concierge .bc-floating-panel.is-expanded .cards-section {
+    --cards-mobile-carousel-display: block;
+}
+
 /* Collapse to the SDK's own composer, preserving drafts and conversation state. */
 .brand-concierge .bc-floating-panel:not(.is-expanded) {
+    max-width: 640px;
     overflow: visible;
     border: 0;
     border-radius: 0;
@@ -255,8 +261,8 @@ main .brand-concierge #brand-concierge-mount {
 
 main .brand-concierge .bc-floating-panel:not(.is-expanded) #brand-concierge-mount {
     height: auto;
-    max-height: min(180px, calc(100dvh - 112px));
-    overflow-y: auto;
+    max-height: none;
+    overflow: visible;
     background: transparent;
 }
 

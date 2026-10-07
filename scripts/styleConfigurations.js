@@ -225,7 +225,7 @@ window.styleConfiguration = {
     "--input-border-radius": "8px",
     "--input-border-radius-mobile": "6px",
     "--input-background": "#F3F8F5",
-    "--input-outline-color": "#d9d9d9",
+    "--input-outline-color": "#2F383C",
     "--input-outline-width": "1px",
     "--input-box-shadow": "0 2px 4px rgba(0, 0, 0, 0.1)",
     "--input-focus-outline-width": "2px",
