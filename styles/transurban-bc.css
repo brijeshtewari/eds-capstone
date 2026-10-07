@@ -220,6 +220,7 @@ body.bc-modal-open {
     outline-offset: -2px;
 }
 
+.brand-concierge .bc-floating-controls[hidden],
 .brand-concierge .bc-floating-controls [hidden] {
     display: none;
 }

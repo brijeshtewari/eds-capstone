@@ -9,6 +9,7 @@ export default async function decorate(block) {
 
   const mount = document.createElement('div');
   mount.id = 'brand-concierge-mount';
+  mount.tabIndex = -1;
 
   const panel = document.createElement('div');
   panel.className = 'bc-floating-panel';
@@ -17,13 +18,6 @@ export default async function decorate(block) {
 
   const controls = document.createElement('div');
   controls.className = 'bc-floating-controls';
-
-  const expand = document.createElement('button');
-  expand.type = 'button';
-  expand.className = 'bc-floating-expand';
-  expand.textContent = 'Open chat';
-  expand.setAttribute('aria-controls', mount.id);
-  expand.setAttribute('aria-expanded', 'false');
 
   const title = document.createElement('span');
   title.className = 'bc-floating-title';
@@ -39,21 +33,19 @@ export default async function decorate(block) {
 
   function setExpanded(expanded) {
     panel.classList.toggle('is-expanded', expanded);
-    expand.setAttribute('aria-expanded', String(expanded));
-    expand.hidden = expanded;
+    controls.hidden = !expanded;
     title.hidden = !expanded;
     minimize.hidden = !expanded;
   }
 
   function minimizeChat() {
     setExpanded(false);
-    expand.focus();
+    mount.focus({ preventScroll: true });
   }
 
-  expand.addEventListener('click', () => {
-    setExpanded(true);
-    const input = mount.querySelector('.chat-input:not(:disabled)');
-    if (input) input.focus();
+  mount.addEventListener('click', () => setExpanded(true));
+  mount.addEventListener('focusin', (event) => {
+    if (event.target.matches('.chat-input')) setExpanded(true);
   });
   minimize.addEventListener('click', minimizeChat);
 
@@ -72,7 +64,7 @@ export default async function decorate(block) {
   });
 
   setExpanded(false);
-  controls.append(title, expand, minimize);
+  controls.append(title, minimize);
   panel.append(controls, mount);
   block.replaceChildren(panel);
 
