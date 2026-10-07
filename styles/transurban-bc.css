@@ -175,7 +175,7 @@ body.bc-modal-open {
     bottom: max(20px, env(safe-area-inset-bottom));
     left: 50%;
     width: calc(100% - 40px);
-    max-width: 960px;
+    max-width: 640px;
     transform: translateX(-50%);
     overflow: hidden;
     border: 1px solid #e3e3e3;
@@ -225,12 +225,12 @@ body.bc-modal-open {
     display: none;
 }
 
-/* Keep the existing expanded chat dimensions and SDK conversation scroll area. */
+/* Keep the expanded chat height and SDK conversation scroll area. */
 main .brand-concierge #brand-concierge-mount {
     box-sizing: border-box;
     height: clamp(480px, calc(100dvh - 160px), 760px);
     max-height: calc(100dvh - 112px - env(safe-area-inset-bottom));
-    max-width: 960px;
+    max-width: 640px;
     margin: 0 auto;
     overflow: hidden;
     background: #fff;
@@ -245,10 +245,19 @@ main .brand-concierge #brand-concierge-mount {
 }
 
 /* Collapse to the SDK's own composer, preserving drafts and conversation state. */
+.brand-concierge .bc-floating-panel:not(.is-expanded) {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
 main .brand-concierge .bc-floating-panel:not(.is-expanded) #brand-concierge-mount {
     height: auto;
     max-height: min(180px, calc(100dvh - 112px));
     overflow-y: auto;
+    background: transparent;
 }
 
 .brand-concierge .bc-floating-panel:not(.is-expanded) .brand-concierge-flex-wrapper,
@@ -262,6 +271,7 @@ main .brand-concierge .bc-floating-panel:not(.is-expanded) #brand-concierge-moun
 .brand-concierge .bc-floating-panel:not(.is-expanded) .brand-concierge-container {
     overflow: visible;
     scrollbar-gutter: auto;
+    background: transparent;
 }
 
 .brand-concierge .bc-floating-panel:not(.is-expanded) #brand-concierge-mount .chat-interface {
@@ -269,21 +279,20 @@ main .brand-concierge .bc-floating-panel:not(.is-expanded) #brand-concierge-moun
     padding: 0;
 }
 
-.brand-concierge .bc-floating-panel:not(.is-expanded) .disclaimer-bottom-page {
-    position: static;
-}
-
 .brand-concierge .bc-floating-panel:not(.is-expanded) .brand-concierge-container::after,
 .brand-concierge .bc-floating-panel:not(.is-expanded) .message-blocker,
+.brand-concierge .bc-floating-panel:not(.is-expanded) .input-section > :not(.input-container),
 .brand-concierge .bc-floating-panel:not(.is-expanded) .chat-interface > :not(.input-section),
 .brand-concierge .bc-floating-panel:not(.is-expanded) .brand-concierge-flex-wrapper > :not(.brand-concierge-container) {
     display: none;
 }
 
-.brand-concierge .bc-floating-panel:not(.is-expanded) .input-section {
+.brand-concierge .bc-floating-panel:not(.is-expanded) #brand-concierge-mount .input-section {
     position: static;
-    margin: 0 auto;
-    padding: 12px;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    background: transparent;
 }
 
 @media (width <= 768px) {
