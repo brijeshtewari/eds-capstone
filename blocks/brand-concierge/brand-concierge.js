@@ -21,7 +21,7 @@ export default async function decorate(block) {
 
   const title = document.createElement('span');
   title.className = 'bc-floating-title';
-  title.textContent = 'Brand Concierge';
+  title.textContent = 'Linkt Support';
 
   const minimize = document.createElement('button');
   minimize.type = 'button';
