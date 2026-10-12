@@ -34,6 +34,27 @@
 <script nonce="aem" src="https://cdn1.adoberesources.net/alloy/2.35.1/alloy.min.js"></script>
 <script nonce="aem" src="https://experience.adobe.net/solutions/experience-platform-brand-concierge-web-agent/static-assets/main.js"></script>
 <script nonce="aem">
+    function safeStringify(obj) {
+        const seen = new WeakSet();
+        return JSON.stringify(
+            obj,
+            (key, value) => {
+                if (typeof value === "function") return `[Function: ${value.name || "anonymous"}]`;
+                if (value instanceof Element) {
+                    return `[DOM Element: <${value.tagName.toLowerCase()}` +
+                        `${value.id ? ' id="' + value.id + '"' : ""}` +
+                        `${value.className ? ' class="' + value.className + '"' : ""}>]`;
+                }
+                if (typeof value === "object" && value !== null) {
+                    if (seen.has(value)) return "[Circular]";
+                    seen.add(value);
+                }
+                return value;
+            },
+            2
+        );
+    }
+
     alloy("configure", {
         defaultConsent: "in",
         edgeDomain: "edge.adobedc.net",
@@ -46,6 +67,32 @@
         prehidingStyle: ".personalization-container { opacity: 0 !important }",
         conversation: {
             region: "aus5"
+        },
+        onBeforeEventSend: (options) => {
+            const x = options.xdm;
+            // 1. Top-level keys available on the options object
+            console.log("onBeforeEventSend - option keys:", Object.keys(options));
+
+            // 2. Full structure BEFORE modification
+            console.log("onBeforeEventSend - BEFORE:\n" + safeStringify(options));
+            // 4. Full structure AFTER modification
+            console.log("onBeforeEventSend - AFTER:\n" + safeStringify(options));
+
+            // Optional: collapsible view in DevTools
+            console.group("onBeforeEventSend details");
+            console.log("xdm:", options.xdm);
+            console.log("data:", options.data);
+            console.log("clickedElement:", options.clickedElement);
+            console.groupEnd();
+
+            const params = new URLSearchParams(window.location.search);
+            const titleParam = params.get("title");
+            if (titleParam) {
+                x.web.webPageDetails.name = titleParam;
+            } else {
+                x.web.webPageDetails.name = "default-page";
+            }
+            return true;
         }
     });
 
