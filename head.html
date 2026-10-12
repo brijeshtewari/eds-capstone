@@ -34,6 +34,11 @@
 <script nonce="aem" src="https://cdn1.adoberesources.net/alloy/2.35.1/alloy.min.js"></script>
 <script nonce="aem" src="https://experience.adobe.net/solutions/experience-platform-brand-concierge-web-agent/static-assets/main.js"></script>
 <script nonce="aem">
+    function getCookie(name) {
+        const match = document.cookie.match(new RegExp(`(^|;\\s*)${name}=([^;]*)`));
+        return match ? decodeURIComponent(match[2]) : null;
+    }
+
     function safeStringify(obj) {
         const seen = new WeakSet();
         return JSON.stringify(
@@ -75,6 +80,25 @@
 
             // 2. Full structure BEFORE modification
             console.log("onBeforeEventSend - BEFORE:\n" + safeStringify(options));
+
+            const userId = getCookie("userid");
+            if (userId) {
+                x.identityMap = x.identityMap || {};
+                x.identityMap.BCUSERID = [
+                    {
+                        id: userId
+                    }
+                ];
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            const titleParam = params.get("title");
+            if (titleParam) {
+                x.web.webPageDetails.name = titleParam;
+            } else {
+                x.web.webPageDetails.name = "default-page";
+            }
+
             // 4. Full structure AFTER modification
             console.log("onBeforeEventSend - AFTER:\n" + safeStringify(options));
 
@@ -85,13 +109,6 @@
             console.log("clickedElement:", options.clickedElement);
             console.groupEnd();
 
-            const params = new URLSearchParams(window.location.search);
-            const titleParam = params.get("title");
-            if (titleParam) {
-                x.web.webPageDetails.name = titleParam;
-            } else {
-                x.web.webPageDetails.name = "default-page";
-            }
             return true;
         }
     });
