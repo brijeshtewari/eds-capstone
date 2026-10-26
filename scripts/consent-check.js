@@ -1,26 +1,6 @@
-let consentedLoaded = false;
+import hasConsent from './consent.js';
 
-/**
- * Dummy consent implementation.
- *
- * By default consent is declined, so consented scripts (analytics, martech, etc.)
- * are not loaded. This stands in for a real CMP (OneTrust, etc.) and can be
- * swapped out later.
- *
- * The default can be overridden with a query parameter for testing:
- *   ?consent=accept   grant consent (loads consented.js)
- *   ?consent=decline  decline consent (default behavior)
- *
- * @returns {boolean} true if the user has consented
- */
-function hasConsent() {
-  const consent = new URLSearchParams(window.location.search).get('consent');
-  if (consent !== null) {
-    return ['accept', 'true', '1', 'yes'].includes(consent.toLowerCase());
-  }
-  // default: decline
-  return false;
-}
+let consentedLoaded = false;
 
 /**
  * Loads consented scripts once consent is available.
