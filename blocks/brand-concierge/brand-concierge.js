@@ -73,5 +73,9 @@ export default async function decorate(block) {
     stylingConfigurations: window.styleConfiguration,
     selector: '#brand-concierge-mount',
     stickySession: false,
+    onEvent(event) {
+      // eslint-disable-next-line no-console
+      console.log('[Brand Concierge]', event.eventType, event.timestamp, event.data);
+    },
   });
 }

@@ -93,6 +93,8 @@
 
             const params = new URLSearchParams(window.location.search);
             const titleParam = params.get("title");
+            x.web = x.web || {};
+            x.web.webPageDetails = x.web.webPageDetails || {};
             if (titleParam) {
                 x.web.webPageDetails.name = titleParam;
             } else {
@@ -110,33 +112,6 @@
             console.groupEnd();
 
             return true;
-        },
-        onEvent: (event) => {
-            try {
-                switch (event.eventType) {
-                    case "query:submitted":
-                        // Map to concierge query submitted
-                        break;
-
-                    case "response:completed":
-                        // Map to concierge response completed
-                        break;
-
-                    case "card:clicked":
-                        // Map to concierge card clicked
-                        break;
-
-                    case "feedback:submitted":
-                        // Map to concierge feedback submitted
-                        break;
-
-                    case "error:occurred":
-                        // Map to concierge error occurred
-                        break;
-                }
-            } catch (error) {
-                console.warn("Concierge analytics tracking failed", error);
-            }
         }
     });
 
