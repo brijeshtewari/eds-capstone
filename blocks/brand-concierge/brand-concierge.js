@@ -74,8 +74,40 @@ export default async function decorate(block) {
     selector: '#brand-concierge-mount',
     stickySession: false,
     onEvent(event) {
-      // eslint-disable-next-line no-console
-      console.log('[Brand Concierge]', event.eventType, event.timestamp, event.data);
+      try {
+        switch (event.eventType) {
+          case 'query:submitted':
+            // eslint-disable-next-line no-console
+            console.log('[Brand Concierge] query:submitted', event);
+            break;
+
+          case 'response:completed':
+            // eslint-disable-next-line no-console
+            console.log('[Brand Concierge] response:completed', event);
+            break;
+
+          case 'card:clicked':
+            // eslint-disable-next-line no-console
+            console.log('[Brand Concierge] card:clicked', event);
+            break;
+
+          case 'feedback:submitted':
+            // eslint-disable-next-line no-console
+            console.log('[Brand Concierge] feedback:submitted', event);
+            break;
+
+          case 'error:occurred':
+            // eslint-disable-next-line no-console
+            console.log('[Brand Concierge] error:occurred', event);
+            break;
+
+          default:
+            break;
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.warn('Concierge analytics tracking failed', error);
+      }
     },
   });
 }
