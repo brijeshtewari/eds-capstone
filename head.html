@@ -64,14 +64,14 @@
         defaultConsent: "in",
         edgeDomain: "edge.adobedc.net",
         edgeBasePath: "ee",
-        datastreamId: "cd5a8e26-3ab6-40b7-a66e-bed2cf297c14",
-        orgId: "09CF60665F98CEF90A495FF8@AdobeOrg",
+        datastreamId: "3f519215-738f-45c7-a8e6-44ed5ea9d6f2",
+        orgId: "0B6930256441790E0A495FFE@AdobeOrg",
         debugEnabled: true,
         idMigrationEnabled: false,
         thirdPartyCookiesEnabled: false,
         prehidingStyle: ".personalization-container { opacity: 0 !important }",
         conversation: {
-            region: "aus5"
+            region: "va7"
         },
         onBeforeEventSend: (options) => {
             const x = options.xdm;
@@ -110,6 +110,33 @@
             console.groupEnd();
 
             return true;
+        },
+        onEvent: (event) => {
+            try {
+                switch (event.eventType) {
+                    case "query:submitted":
+                        // Map to concierge query submitted
+                        break;
+
+                    case "response:completed":
+                        // Map to concierge response completed
+                        break;
+
+                    case "card:clicked":
+                        // Map to concierge card clicked
+                        break;
+
+                    case "feedback:submitted":
+                        // Map to concierge feedback submitted
+                        break;
+
+                    case "error:occurred":
+                        // Map to concierge error occurred
+                        break;
+                }
+            } catch (error) {
+                console.warn("Concierge analytics tracking failed", error);
+            }
         }
     });
 
