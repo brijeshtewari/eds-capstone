@@ -1,34 +1,38 @@
 import hasConsent from './consent.js';
 
 export const analyticsConfig = {
-  enabled: false,
+  enabled: true,
   events: {
-    'webclient:initialized': { name: 'Concierge Initialized', successEvent: null },
-    'query:submitted': { name: 'Concierge Query Submitted', successEvent: null },
-    'promptSuggestion:clicked': { name: 'Concierge Prompt Suggestion Clicked', successEvent: null },
-    'card:clicked': { name: 'Concierge Card Clicked', successEvent: null },
-    'history:cleared': { name: 'Concierge History Cleared', successEvent: null },
-    'response:started': { name: 'Concierge Response Started', successEvent: null },
-    'response:completed': { name: 'Concierge Response Completed', successEvent: null },
-    'cards:rendered': { name: 'Concierge Cards Rendered', successEvent: null },
-    'feedback:submitted': { name: 'Concierge Feedback Submitted', successEvent: null },
-    'error:occurred': { name: 'Concierge Error Occurred', successEvent: null },
+    'webclient:initialized': { name: 'BC Web Client Initialized', successEvent: 'event1' },
+    'query:submitted': { name: 'BC Query Submitted', successEvent: 'event2' },
+    'promptSuggestion:clicked': { name: 'BC Prompt Suggestion Clicked', successEvent: 'event3' },
+    'card:clicked': { name: 'BC Card Clicked', successEvent: 'event4' },
+    'history:cleared': { name: 'BC History Cleared', successEvent: 'event5' },
+    'response:started': { name: 'BC Response Started', successEvent: 'event6' },
+    'response:completed': { name: 'BC Response Completed', successEvent: 'event7' },
+    'cards:rendered': { name: 'BC Cards Rendered', successEvent: 'event8' },
+    'feedback:submitted': { name: 'BC Feedback Submitted', successEvent: 'event9' },
+    'error:occurred': { name: 'BC Error Occurred', successEvent: 'event10' },
   },
   dimensions: {
-    eventType: null,
+    eventType: 'eVar51',
     callbackTimestamp: null,
-    conversationId: null,
-    interactionId: null,
+    conversationId: 'eVar52',
+    interactionId: 'eVar53',
     instanceName: null,
-    productName: null,
+    productName: 'eVar59',
+    cardType: 'eVar55',
     productPageURL: null,
-    displayMode: null,
+    displayMode: 'eVar56',
     cardCount: null,
-    feedbackType: null,
+    feedbackType: 'eVar54',
     feedbackCategories: null,
-    errorCategory: null,
+    errorCategory: 'eVar57',
+    promptCategory: 'eVar58',
+    pageContext: 'eVar60',
   },
   approvedFeedbackCategories: [],
+  approvedPromptCategories: [],
 };
 
 const eventTypes = Object.keys(analyticsConfig.events);
@@ -43,15 +47,19 @@ function validateConfig(config) {
     throw new Error('Assign a distinct Analytics success event and name to all 10 Concierge events.');
   }
   const slots = Object.values(config.dimensions).filter((value) => value !== null);
-  if (!config.dimensions.eventType || !config.dimensions.callbackTimestamp
+  if (!config.dimensions.eventType
     || slots.some((slot) => !/^eVar([1-9]\d?|1\d{2}|2[0-4]\d|250)$/.test(slot))
     || new Set(slots).size !== slots.length
     || Object.keys(config.dimensions).some((key) => !dimensionNames.includes(key))) {
-    throw new Error('Assign unique eVar1-eVar250 slots; eventType and callbackTimestamp are required.');
+    throw new Error('Assign unique eVar1-eVar250 slots; eventType is required.');
   }
   if (!Array.isArray(config.approvedFeedbackCategories)
     || config.approvedFeedbackCategories.some((value) => typeof value !== 'string')) {
     throw new Error('approvedFeedbackCategories must be an array of approved category labels.');
+  }
+  if (!Array.isArray(config.approvedPromptCategories)
+    || config.approvedPromptCategories.some((value) => typeof value !== 'string')) {
+    throw new Error('approvedPromptCategories must be an array of approved category labels.');
   }
 }
 
@@ -88,12 +96,14 @@ function eventDimensions(event, config) {
     callbackTimestamp: String(event.timestamp),
     conversationId: text(data.conversationId),
     interactionId: text(data.interactionId),
+    pageContext: text(window.digitalData?.page?.pageInfo?.pageName),
   };
   switch (event.eventType) {
     case 'webclient:initialized':
       dimensions.instanceName = text(data.instanceName);
       break;
     case 'card:clicked':
+      dimensions.cardType = text(data.element?.type) || 'unknown';
       dimensions.productName = text(data.element?.entity_info?.productName);
       if (config.dimensions.productPageURL) {
         dimensions.productPageURL = productURL(data.element?.entity_info?.productPageURL);
@@ -114,9 +124,10 @@ function eventDimensions(event, config) {
         dimensions.feedbackCategories = categories.length ? categories.join('|') : undefined;
       }
       break;
-    case 'error:occurred':
-      // The callback supplies no structured error code; never classify from raw messages.
-      dimensions.errorCategory = 'client-error';
+    case 'promptSuggestion:clicked':
+      if (config.approvedPromptCategories.includes(data.promptCategory)) {
+        dimensions.promptCategory = data.promptCategory;
+      }
       break;
     default:
       break;
@@ -153,7 +164,8 @@ export default function createConciergeEventHandler(instanceName, config = analy
         linkName: mapping.name,
         linkType: 'o',
         events: mapping.successEvent,
-        pageName: new URLSearchParams(window.location.search).get('title') || 'default-page',
+        pageName: dimensions.pageContext
+          || new URLSearchParams(window.location.search).get('title') || 'default-page',
       };
       Object.entries(dimensions).forEach(([name, value]) => {
         const slot = config.dimensions[name];
